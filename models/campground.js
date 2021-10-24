@@ -5,8 +5,6 @@ const review = require('./review');
 const Schema = mongoose.Schema;
 const Review = require('./review');
 
-// https://res.cloudinary.com/demo/image/upload/w_150,h_300,c_fill/boulder.jpg
-
 const ImageSchema = new Schema({
     url: String,
     filename: String,
@@ -17,9 +15,18 @@ ImageSchema.virtual('thumbnail').get(function () {
 });
 
 const opts = { toJSON: { virtuals: true } };
+
+const maxImgArrLength = 5;
+const limitImgArrLength = function (arr) {
+    return arr.length <= maxImgArrLength;
+}
+
 const CampgroundSchema = new Schema({
     title: String,
-    images: [ImageSchema],
+    images: {
+        type: [ImageSchema],
+        validate: [limitImgArrLength, `Number of images is more than ${maxImgArrLength}!`],
+    },
     price: Number,
     description: String,
     location: String,

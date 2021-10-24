@@ -24,11 +24,11 @@
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Add Image(s)</label>
+                <h6><em>Your campground currently has <%= campground.images.length %> image(s), you can add <%= 5 - campground.images.length %> more</em></h6>
                 <input class="form-control" type="file" id="image" name="image" multiple>
             </div>
             <div class="mb-3">
                 <% campground.images.forEach(function (img, i) { %>
-                    <!-- <label for="image-<%= i %>">Delete</label> -->
                     <label for="image-<%= i %>">
                         <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
                         Delete
@@ -42,6 +42,5 @@
                 <button class="btn btn-info">Update Campground</button>
             </div>
         </form>
-        <a href="/campgrounds/<%= campground._id %>">Back to Campgrounds</a>
     </div>
 </div>
